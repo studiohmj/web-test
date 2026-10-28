@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lumora — Independent Design & Engineering Studio</title>
+<meta name="description" content="Lumora is an independent studio crafting brands, products, and the systems that connect them — bold ideas, shipped with quiet precision." />
+<meta name="theme-color" content="#0a0a0a" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://api.getlayers.ai/storage/v1/object/public/public/assets/lumora-e8b711fc68/hero/after.jpg">
+<style>
+:root{
+  --background:#ffffff; --foreground:#111111; --ink:#0a0a0a;
+  --muted:#8d8d8d; --subtle:#b6b6b6; --line:#e6e5e2;
+  --surface:#f1f0ee; --surface-2:#e3e2df;
+  --accent:#b15f2c; --accent-from:#cf8047; --accent-to:#97501f;
+  --hero-from:#ecebe9; --hero-to:#c9c9c9;
+  --radius-pill:9999px; --radius-card:2rem; --radius-card-sm:1.25rem; --radius-control:.875rem;
+  --text-watermark:13rem;
+  --e-spring:cubic-bezier(.22,1,.36,1);
+  --e-soft:cubic-bezier(.16,1,.3,1);
+  --e-snap:cubic-bezier(.2,.8,.2,1);
+  --e-cubic:cubic-bezier(.215,.61,.355,1);
+  --e-quart:cubic-bezier(.165,.84,.44,1);
+}
+*{ box-sizing:border-box; margin:0; padding:0 }
+html{ font-size:16px; -webkit-font-smoothing:antialiased }
+body{ background:#ffffff; color:#111111; font-family:'Onest',sans-serif; overflow-x:hidden }
+a{ color:inherit; text-decoration:none }
+button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer }
+ul{ list-style:none }
+img{ display:block }
+[hidden]{ display:none !important }
+.sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0 }
+:focus-visible{ outline:2px solid #b15f2c; outline-offset:2px }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important } }
+
+/* Adaptive rem grid */
+@media (max-width:1920px){ html{ font-size:0.833333vw } }
+@media (max-width:1440px){ html{ font-size:1.111111vw } }
+@media (max-width:1024px){ html{ font-size:1.5625vw } }
+@media (max-width:640px){  html{ font-size:4.444444vw } }
+
+/* Lenis */
+html.lenis, html.lenis body{ height:auto }
+.lenis.lenis-smooth{ scroll-behavior:auto !important }
+.lenis.lenis-stopped{ overflow:hidden }
+
+.shell{ max-width:88rem; margin-inline:auto; padding-inline:1.25rem }
+@media (min-width:640px){ .shell{ padding-inline:2rem } }
+
+.ic{ display:inline-flex; width:1em; height:1em; flex:none; line-height:0 }
+.ic svg{ width:100%; height:100% }
+
+/* Reveal primitives */
+.rv{ opacity:0; transform:translate3d(0,var(--ty,0px),0) scale(var(--sc,1));
+  transition:opacity var(--dur,.8s) var(--ez,var(--e-soft)) var(--d,0ms), transform var(--dur,.8s) var(--ez,var(--e-soft)) var(--d,0ms) }
+.rv.in{ opacity:var(--o,1); transform:none }
+.lw{ display:inline-block; overflow:hidden; vertical-align:top; padding-bottom:.1em; margin-bottom:-.1em }
+.li{ display:inline-block; transform:translateY(105%); opacity:0; transition:transform .9s var(--e-cubic), opacity .9s var(--e-cubic) }
+.in .li{ transform:none; opacity:1 }
+.ww{ display:inline-block; transform:translateY(24px); opacity:0; transition:transform .7s var(--e-quart), opacity .7s var(--e-quart) }
+.in .ww{ transform:none; opacity:1 }
+
+/* Skip link */
+.skip{ position:fixed; left:-9999px; top:1rem }
+.skip:focus{ left:1rem; z-index:60; border-radius:.875rem; background:#0a0a0a; padding:.5rem 1rem; font-size:.875rem; color:#fff }
+
+/* Eyebrow */
+.eyebrow{ display:inline-flex; align-items:center; gap:.5rem; font-size:.875rem; font-weight:500; color:rgba(17,17,17,.7) }
+.eyebrow::before{ content:""; width:.375rem; height:.375rem; border-radius:9999px; background:rgba(17,17,17,.5); flex:none }
+.eyebrow.light{ color:rgba(255,255,255,.7) }
+.eyebrow.light::before{ background:rgba(255,255,255,.6) }
+.eyebrow.boxed{ border:1px solid #e6e5e2; border-radius:9999px; padding:.375rem 1rem }
+
+/* Pill button */
+.pill-btn{ display:inline-block }
+.pill{ display:inline-flex; align-items:center; gap:.75rem; border-radius:9999px; font-size:.875rem; font-weight:500; padding:.875rem 1.75rem; white-space:nowrap; transform-origin:center }
+.pill.arrow{ padding:.375rem .375rem .375rem 1.5rem }
+.pill.dark{ background:#0a0a0a; color:#fff }
+.pill.light{ background:#f1f0ee; color:#111 }
+.pill.outline{ border:1px solid #e6e5e2; background:transparent; color:#111 }
+.pill-badge{ width:2.25rem; height:2.25rem; display:grid; place-items:center; border-radius:9999px; font-size:1rem; background:#0a0a0a; color:#fff }
+.pill.dark .pill-badge{ background:#fff; color:#0a0a0a }
+
+/* Tag chip */
+.chip{ display:inline-flex; border:1px solid rgba(255,255,255,.25); color:#fff; border-radius:9999px; padding:.5rem 1rem; font-size:.875rem }
+
+/* ===== Header ===== */
+.header{ position:absolute; inset-inline:0; top:0; z-index:50 }
+.header-in{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding-block:1.25rem }
+@media (min-width:640px){ .header-in{ padding-block:1.5rem } }
+.brand{ display:flex; align-items:center; gap:.5rem; font-size:1.125rem; font-weight:600; letter-spacing:-.01em }
+.brand .ic{ font-size:1.25rem; color:#b15f2c }
+.nav-primary{ display:none }
+@media (min-width:1024px){ .nav-primary{ display:flex } }
+.nav-primary ul{ display:flex; gap:2rem; font-size:.875rem; font-weight:500 }
+.nav-primary .lbl{ display:inline-flex; align-items:center; gap:.25rem }
+.caret{ font-size:.75rem; opacity:.6 }
+.hdr-right{ display:flex; align-items:center; gap:.75rem }
+.glass{ border:1px solid rgba(230,229,226,.8); background:rgba(255,255,255,.4); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); border-radius:.875rem }
+.clock{ display:none; align-items:center; gap:.75rem; padding:.5rem .75rem; font-size:.75rem; color:rgba(17,17,17,.7) }
+@media (min-width:768px){ .clock{ display:flex } }
+.clock-lbl{ color:rgba(17,17,17,.45) }
+.clock-time{ min-width:3.5rem; font-variant-numeric:tabular-nums; font-weight:500; color:#111 }
+.clock-sep{ color:rgba(17,17,17,.3) }
+.clock-date{ font-weight:500 }
+.menu-btn{ transition:background .2s }
+.menu-btn:hover{ background:rgba(255,255,255,.7) }
+.menu-inner{ display:flex; align-items:center; gap:.5rem; padding:.5rem 1rem; font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.05em }
+.menu-inner .ic{ font-size:.875rem }
+.menu-word{ display:none }
+@media (min-width:640px){ .menu-word{ display:inline } }
+
+/* ===== Hero ===== */
+.hero{ position:relative; isolation:isolate; overflow:hidden; border-radius:0 0 2rem 2rem; background:#c9c9c9 }
+.liquid{ position:absolute; inset:0; z-index:0 }
+.liquid img, .liquid canvas{ position:absolute; inset:0; width:100%; height:100% }
+.liquid img{ object-fit:cover }
+.liquid canvas{ pointer-events:none }
+.vignette{ position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(to bottom, rgba(255,255,255,.35), transparent, rgba(255,255,255,.35)) }
+.wm{ pointer-events:none; position:absolute; inset-inline:0; text-align:center; user-select:none; -webkit-user-select:none; font-weight:700; line-height:1; font-size:var(--text-watermark); white-space:nowrap }
+.hero .wm{ bottom:7rem; z-index:1; color:rgba(255,255,255,.4) }
+.hero-grid{ position:relative; z-index:20; display:flex; flex-direction:column; gap:2rem; padding-top:7rem; padding-bottom:5rem }
+@media (min-width:1024px){
+  .hero-grid{ display:grid; min-height:100lvh; grid-template-columns:repeat(12,1fr); gap:2.5rem; padding-top:9rem; padding-bottom:7rem; align-items:end }
+}
+.hero-left{ display:flex; flex-direction:column; gap:1.75rem }
+.hero-right{ display:flex; flex-direction:column; align-items:flex-start; gap:2rem }
+@media (min-width:1024px){ .hero-left{ grid-column:span 7 } .hero-right{ grid-column:span 5; align-items:flex-end } }
+.hero-h1{ max-width:18ch; font-size:2.25rem; font-weight:600; line-height:.98; letter-spacing:-.02em }
+@media (min-width:640px){ .hero-h1{ font-size:3rem } }
+@media (min-width:768px){ .hero-h1{ font-size:3.75rem } }
+.rating{ display:flex; align-items:center; gap:.75rem }
+.stars{ display:flex; color:#b15f2c; font-size:1rem }
+.rating-txt{ font-size:.875rem; font-weight:500; color:rgba(17,17,17,.7) }
+.ctas{ display:flex; flex-wrap:wrap; gap:.75rem }
+
+.hcard{ width:100%; max-width:24rem; border-radius:1.25rem; background:rgba(255,255,255,.7); padding:.5rem;
+  box-shadow:0 0 0 1px rgba(230,229,226,.7), 0 1px 2px rgba(0,0,0,.05); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px) }
+@media (min-width:1024px){ .hcard{ width:19rem } }
+.hcard-row{ display:flex; gap:.5rem; cursor:pointer; border-radius:.875rem }
+.hcard-tile{ aspect-ratio:1; width:6rem; flex:none; display:grid; place-items:center; border-radius:.875rem; background:#0a0a0a; font-size:1.875rem; color:#cf8047 }
+.hcard-panel{ flex:1; border-radius:.875rem; background:rgba(241,240,238,.7); padding:.75rem; display:flex; flex-direction:column; justify-content:space-between }
+.hc-slot{ position:relative; min-height:3.25rem }
+.hc-item{ position:absolute; inset:0; opacity:0; transition:opacity .5s var(--e-spring), transform .5s var(--e-spring) }
+.hc-item.on{ opacity:1 }
+.hc-cap{ font-size:.65rem; font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:rgba(17,17,17,.45) }
+.hc-title{ max-width:8rem; font-size:.875rem; font-weight:500; line-height:1.35 }
+.hc-bottom{ display:flex; align-items:center; justify-content:space-between; margin-top:.5rem }
+.hc-dots{ display:flex; gap:.25rem }
+.hc-dot{ height:.25rem; width:.375rem; border-radius:9999px; background:rgba(17,17,17,.2); transition:all .3s }
+.hc-dot.on{ width:1rem; background:rgba(17,17,17,.7) }
+.hc-nav{ display:flex; gap:.25rem }
+.hc-btn{ width:1.75rem; height:1.75rem; display:grid; place-items:center; border-radius:9999px; background:#fff; color:rgba(17,17,17,.7); box-shadow:0 0 0 1px #e6e5e2; font-size:.75rem; transition:color .2s }
+.hc-btn:hover{ color:#111 }
+.hc-btn.prev .ic{ transform:rotate(180deg) }
+
+.partners{ width:100%; max-width:24rem }
+@media (min-width:1024px){ .partners{ width:19rem } }
+.partners-lbl{ margin-bottom:.75rem; font-size:.75rem; font-weight:500; color:rgba(17,17,17,.45); text-align:left }
+@media (min-width:1024px){ .partners-lbl{ text-align:right } }
+.partners ul{ display:grid; grid-template-columns:repeat(4,1fr); column-gap:1rem; row-gap:.75rem }
+.partner{ display:flex; align-items:center; gap:.375rem; font-size:.75rem; color:rgba(17,17,17,.7) }
+.partner .ic{ font-size:.875rem; color:rgba(17,17,17,.4) }
+
+.hero-status{ position:relative; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:.75rem; border-top:1px solid rgba(17,17,17,.1);
+  padding-block:1.25rem; font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.025em; color:rgba(17,17,17,.6) }
+.hero-status .mid{ display:none }
+@media (min-width:640px){ .hero-status .mid{ display:inline } }
+.hero-status .scroll{ display:inline-flex; gap:.5rem }
+
+/* ===== About ===== */
+section{ background:#fff }
+.about{ display:grid; grid-template-columns:1fr; align-items:center; gap:3rem; padding-block:5rem }
+@media (min-width:1024px){ .about{ grid-template-columns:1fr 1fr; padding-block:7rem } }
+.globe-block{ position:relative; min-height:14rem; display:flex; flex-direction:column; justify-content:space-between }
+@media (min-width:1024px){ .globe-block{ min-height:20rem } }
+.globe-bg{ position:absolute; left:-1rem; top:50%; transform:translateY(-50%); font-size:12rem; color:rgba(17,17,17,.1); pointer-events:none }
+@media (min-width:640px){ .globe-bg{ font-size:16rem } }
+@media (min-width:1024px){ .globe-bg{ left:-1.5rem; font-size:20rem } }
+.globe-block .eyebrow{ position:relative; align-self:flex-start }
+.globe-note{ position:relative; display:flex; align-items:center; gap:.75rem; font-size:.875rem; color:rgba(17,17,17,.7) }
+.globe-note .ic{ font-size:1.5rem; color:#111 }
+.globe-note span:last-child{ max-width:14rem }
+.statement{ display:flex; flex-direction:column; gap:2.5rem }
+.statement h2{ font-size:1.5rem; font-weight:500; line-height:1.35; letter-spacing:-.01em }
+@media (min-width:640px){ .statement h2{ font-size:1.875rem } }
+.statement .mute{ color:#8d8d8d }
+.about-foot{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1.5rem; border-top:1px solid #e6e5e2; padding-top:1.5rem }
+.about-foot .lbl{ font-size:.875rem; color:rgba(17,17,17,.45); margin-bottom:.75rem }
+.socials{ display:flex; gap:.5rem }
+.social{ width:2.25rem; height:2.25rem; display:grid; place-items:center; border-radius:9999px; font-size:.875rem; background:#f1f0ee; color:rgba(17,17,17,.7) }
+.social.x{ background:#b15f2c; color:#fff }
+
+/* ===== CreateBand ===== */
+.band{ display:flex; flex-direction:column; gap:.75rem; padding-block:2.5rem }
+@media (min-width:640px){ .band{ flex-direction:row; gap:1rem } }
+.band li{ flex:1 }
+.tile{ display:grid; place-items:center; height:6rem; border-radius:9999px; font-size:1.875rem; font-weight:500 }
+@media (min-width:640px){ .tile{ height:10rem; font-size:2.25rem } }
+.tile.light{ background:#f1f0ee; color:#111 }
+.tile.accent{ background:linear-gradient(to bottom right,#cf8047,#97501f); color:#fff }
+.tile.dark{ background:#0a0a0a; color:#fff }
+.tile.dark .ic{ font-size:2.25rem }
+@media (min-width:640px){ .tile.dark .ic{ font-size:3rem } }
+.tile.ghost{ background:rgba(241,240,238,.6); color:rgba(17,17,17,.35) }
+
+/* ===== Portfolio ===== */
+.works{ padding-top:2.5rem; padding-bottom:5rem }
+@media (min-width:1024px){ .works{ padding-bottom:7rem } }
+.works-head{ display:flex; flex-direction:column; align-items:center; gap:1.25rem; margin-bottom:3rem; text-align:center }
+.h2-big{ font-size:2.25rem; font-weight:600; letter-spacing:-.02em; line-height:1.05 }
+@media (min-width:640px){ .h2-big{ font-size:3rem } }
+.works-head .h2-big{ width:fit-content; margin-inline:auto }
+.pf-grid{ display:grid; grid-template-columns:1fr; gap:1.5rem }
+@media (min-width:768px){ .pf-grid{ grid-template-columns:1fr 1fr } }
+.pf-link{ display:block }
+.pf-card{ position:relative; min-height:22rem; overflow:hidden; border-radius:2rem; background:#0a0a0a; padding:1.5rem; color:#fff; box-shadow:0 0 0 1px rgba(255,255,255,.05) }
+@media (min-width:640px){ .pf-card{ min-height:26rem; padding:2rem } }
+.pf-meta{ position:relative; z-index:2; display:flex; justify-content:space-between; align-items:flex-start; font-size:.75rem; text-transform:uppercase; letter-spacing:.025em; color:rgba(255,255,255,.45) }
+.pf-badge{ width:2.75rem; height:2.75rem; display:grid; place-items:center; border-radius:9999px; background:rgba(255,255,255,.1); color:#fff; box-shadow:0 0 0 1px rgba(255,255,255,.15); font-size:1rem }
+.pf-mark{ position:absolute; inset:0; display:grid; place-items:center; pointer-events:none }
+.pf-mark > span{ display:inline-flex; align-items:flex-start }
+.pf-mark .ic{ font-size:4.5rem; color:rgba(255,255,255,.9) }
+.pf-mark sup{ font-size:.75rem; color:rgba(255,255,255,.6) }
+.pf-body{ position:absolute; inset-inline:1.5rem; bottom:1.5rem; z-index:2 }
+@media (min-width:640px){ .pf-body{ inset-inline:2rem; bottom:2rem } }
+.pf-body h3{ font-size:1.5rem; font-weight:500; letter-spacing:-.01em }
+@media (min-width:640px){ .pf-body h3{ font-size:1.875rem } }
+.pf-body p{ margin-top:.5rem; max-width:28rem; font-size:.875rem; color:rgba(255,255,255,.55) }
+.pf-tags{ margin-top:1.25rem; display:flex; flex-wrap:wrap; gap:.5rem }
+
+/* ===== Services ===== */
+.services{ padding-block:5rem }
+@media (min-width:1024px){ .services{ padding-block:7rem } }
+.services .h2-big{ margin:1.25rem 0 3rem; max-width:16ch }
+@media (min-width:640px){ .services .h2-big{ margin-bottom:3.5rem } }
+.svc-list li{ border-top:1px solid #e6e5e2 }
+.svc-list li:first-child{ border-top:none }
+.svc-link{ display:block }
+.svc-row{ display:flex; align-items:center; gap:1rem; border-radius:1.25rem; padding:1.5rem }
+@media (min-width:640px){ .svc-row{ gap:1.5rem; padding-block:2rem } }
+.svc-idx{ width:1.75rem; flex:none; font-size:.875rem; font-weight:500; color:rgba(17,17,17,.4) }
+@media (min-width:640px){ .svc-idx{ width:2.5rem } }
+.svc-row h3{ flex:1; font-size:1.5rem; font-weight:500; letter-spacing:-.01em }
+@media (min-width:640px){ .svc-row h3{ font-size:1.875rem } }
+@media (min-width:768px){ .svc-row h3{ font-size:2.25rem } }
+.svc-row p{ display:none; max-width:20rem; font-size:.875rem; color:rgba(17,17,17,.55) }
+@media (min-width:1024px){ .svc-row p{ display:block } }
+.svc-arrow{ width:2.5rem; height:2.5rem; flex:none; display:grid; place-items:center; border-radius:9999px; background:#0a0a0a; color:#fff; font-size:1rem }
+@media (min-width:640px){ .svc-arrow{ width:3rem; height:3rem } }
+
+/* ===== Stats ===== */
+.stats-wrap{ padding-bottom:5rem }
+@media (min-width:1024px){ .stats-wrap{ padding-bottom:7rem } }
+.stats{ border-radius:2rem; background:#0a0a0a; padding:3rem 1.5rem; color:#fff }
+@media (min-width:640px){ .stats{ padding:4rem 2rem } }
+@media (min-width:768px){ .stats{ padding-inline:4rem } }
+.stats h2{ margin-top:1rem; max-width:20ch; font-size:1.875rem; font-weight:500; letter-spacing:-.01em; line-height:1.2 }
+@media (min-width:768px){ .stats h2{ font-size:2.25rem } }
+.stats-grid{ margin-top:3.5rem; display:grid; grid-template-columns:repeat(2,1fr); column-gap:2rem; row-gap:3rem }
+@media (min-width:1024px){ .stats-grid{ grid-template-columns:repeat(4,1fr) } }
+.stat-num{ font-size:3rem; font-weight:600; letter-spacing:-.02em; line-height:1; font-variant-numeric:tabular-nums }
+@media (min-width:640px){ .stat-num{ font-size:3.75rem } }
+@media (min-width:768px){ .stat-num{ font-size:4.5rem } }
+.stat-lbl{ margin-top:.75rem; font-size:.875rem; color:rgba(255,255,255,.55) }
+
+/* ===== Footer ===== */
+.footer{ position:relative; overflow:hidden; border-radius:2rem 2rem 0 0; background:#0a0a0a; color:#fff }
+.footer-in{ position:relative; z-index:10; padding-top:5rem; padding-bottom:2.5rem }
+@media (min-width:1024px){ .footer-in{ padding-top:6rem } }
+.f-cta{ display:flex; flex-direction:column; gap:2rem; border-bottom:1px solid rgba(255,255,255,.1); padding-bottom:4rem }
+@media (min-width:1024px){ .f-cta{ flex-direction:row; align-items:flex-end; justify-content:space-between } }
+.f-cta h2{ max-width:16ch; font-size:2.25rem; font-weight:600; letter-spacing:-.02em; line-height:1.05 }
+@media (min-width:640px){ .f-cta h2{ font-size:3rem } }
+@media (min-width:768px){ .f-cta h2{ font-size:3.75rem } }
+.f-cols{ display:grid; grid-template-columns:1fr; gap:3rem; padding-block:4rem }
+@media (min-width:768px){ .f-cols{ grid-template-columns:repeat(2,1fr) } }
+@media (min-width:1024px){ .f-cols{ grid-template-columns:repeat(4,1fr) } }
+.f-brand{ display:flex; align-items:center; gap:.5rem; font-size:1.125rem; font-weight:600 }
+.f-brand .ic{ font-size:1.25rem }
+.f-tag{ margin-top:1rem; max-width:20rem; font-size:.875rem; color:rgba(255,255,255,.55) }
+.f-title{ font-size:.75rem; text-transform:uppercase; letter-spacing:.025em; color:rgba(255,255,255,.4); margin-bottom:1.25rem }
+.f-links{ display:flex; flex-direction:column; gap:.75rem; font-size:.875rem }
+.alink{ display:inline-flex }
+.alink > span{ display:inline-block }
+.f-legal{ display:flex; flex-direction:column; align-items:center; justify-content:space-between; gap:1rem; border-top:1px solid rgba(255,255,255,.1); padding-top:2rem; font-size:.75rem; color:rgba(255,255,255,.45) }
+@media (min-width:640px){ .f-legal{ flex-direction:row } }
+.f-legal nav{ display:flex; gap:1.5rem }
+.footer .wm{ bottom:-1.5rem; z-index:0; color:rgba(255,255,255,.05) }
+
+/* ===== NavMenu ===== */
+.navmenu{ position:fixed; inset:0; z-index:115; display:flex; flex-direction:column; background:#0a0a0a; color:#fff; opacity:0; transition:opacity .45s var(--e-spring) }
+.navmenu.open{ opacity:1 }
+.nm-top{ display:flex; align-items:center; justify-content:space-between; padding-block:1.25rem; width:100% }
+@media (min-width:640px){ .nm-top{ padding-block:1.5rem } }
+.nm-top .brand .ic{ color:#cf8047 }
+.nm-close{ display:inline-flex; align-items:center; gap:.5rem; border:1px solid rgba(255,255,255,.15); border-radius:.875rem; padding:.5rem 1rem; font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:rgba(255,255,255,.7); transition:border-color .2s, color .2s }
+.nm-close:hover{ border-color:rgba(255,255,255,.4); color:#fff }
+.nm-close .ic{ font-size:.875rem }
+.nm-nav{ flex:1; display:flex; flex-direction:column; justify-content:center; width:100% }
+.nm-nav ul{ display:flex; flex-direction:column; gap:.25rem }
+.nm-item{ display:flex; align-items:baseline; gap:1rem; width:100%; padding-block:.5rem; text-align:left; font-size:2.25rem; font-weight:600; letter-spacing:-.02em; line-height:1.1;
+  transform:translateY(1rem); opacity:0; transition:all .5s ease-out }
+@media (min-width:640px){ .nm-item{ font-size:3.75rem } }
+.navmenu.open .nm-item{ transform:translateY(0); opacity:1 }
+.nm-idx{ font-size:1rem; font-weight:400; color:rgba(255,255,255,.3); transition:color .3s }
+.nm-lbl{ color:rgba(255,255,255,.7); transition:color .3s }
+.nm-item:hover .nm-idx{ color:#cf8047 }
+.nm-item:hover .nm-lbl{ color:#fff }
+.nm-bottom{ display:flex; flex-direction:column; gap:.75rem; border-top:1px solid rgba(255,255,255,.1); padding-block:1.5rem; font-size:.75rem; text-transform:uppercase; letter-spacing:.025em; color:rgba(255,255,255,.45); width:100% }
+@media (min-width:640px){ .nm-bottom{ flex-direction:row; justify-content:space-between } }
+.nm-bottom button{ text-transform:uppercase; letter-spacing:.025em; color:rgba(255,255,255,.7); text-align:left }
+.nm-bottom button:hover{ color:#fff; text-decoration:underline }
+
+/* ===== Modal ===== */
+.modal{ position:fixed; inset:0; z-index:110; display:flex; align-items:flex-end; justify-content:center; padding:1rem; background:rgba(17,17,17,.3);
+  -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px); opacity:0; transition:opacity .45s var(--e-spring) }
+@media (min-width:640px){ .modal{ align-items:center } }
+.modal.open{ opacity:1 }
+.m-panel{ position:relative; width:100%; max-width:32rem; overflow:hidden; border-radius:2rem; background:#fff; padding:1.5rem;
+  box-shadow:0 0 0 1px #e6e5e2, 0 25px 50px -12px rgba(0,0,0,.25); transform:translateY(28px); transition:transform .5s var(--e-spring) }
+@media (min-width:640px){ .m-panel{ padding:2rem } }
+.modal.open .m-panel{ transform:translateY(0) }
+.modal.closing .m-panel{ transform:translateY(18px) }
+.m-close{ position:absolute; right:1rem; top:1rem; width:2.25rem; height:2.25rem; display:grid; place-items:center; border-radius:9999px; background:#f1f0ee; color:rgba(17,17,17,.6); transition:background .2s, color .2s }
+.m-close:hover{ background:#e3e2df; color:#111 }
+.m-head{ margin-bottom:1.5rem; display:flex; flex-direction:column; gap:.375rem }
+.m-kicker{ display:inline-flex; align-items:center; gap:.5rem; font-size:.875rem; font-weight:500; color:rgba(17,17,17,.6) }
+.m-kicker::before{ content:""; width:.375rem; height:.375rem; border-radius:9999px; background:#b15f2c }
+.m-panel h2{ font-size:1.5rem; font-weight:600; letter-spacing:-.01em }
+@media (min-width:640px){ .m-head h2{ font-size:1.875rem } }
+.m-form{ display:flex; flex-direction:column; gap:1rem }
+.m-form label{ display:flex; flex-direction:column; gap:.5rem }
+.m-form label > span{ font-size:.75rem; font-weight:500; text-transform:uppercase; letter-spacing:.025em; color:rgba(17,17,17,.5) }
+.m-form input, .m-form textarea{ width:100%; border:1px solid #e6e5e2; background:rgba(241,240,238,.5); border-radius:.875rem; padding:.75rem 1rem; font:inherit; font-size:.875rem; color:#111; outline:none; transition:border-color .2s, background .2s }
+.m-form textarea{ resize:none }
+.m-form input:focus, .m-form textarea:focus{ border-color:rgba(17,17,17,.3); background:#fff }
+.m-row{ margin-top:.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem }
+.m-note{ font-size:.75rem; color:rgba(17,17,17,.45) }
+.m-success{ display:flex; flex-direction:column; align-items:center; text-align:center; gap:1rem; padding-block:2rem }
+.m-success-badge{ width:3.5rem; height:3.5rem; display:grid; place-items:center; border-radius:9999px; background:#0a0a0a; color:#cf8047; font-size:1.5rem }
+.m-success p{ max-width:32ch; font-size:.875rem; color:rgba(17,17,17,.6) }
+
+/* ===== Mobile fixes ===== */
+.wm{ display:flex; justify-content:center }                 /* keep oversize watermark centered, clip both sides */
+main{ overflow-x:clip }
+@media (max-width:639px){
+  .partners ul{ grid-template-columns:repeat(3,1fr) }        /* 4 cols overflow names at 360px */
+  .partner{ min-width:0 }
+  .m-form input, .m-form textarea{ font-size:16px }          /* prevent iOS zoom on focus */
+  .hero-status{ font-size:.6875rem }
+}
+.partner{ white-space:nowrap }
+@media (max-width:767px){                                      /* stacked card: logo sits between meta and text */
+  .pf-card{ display:flex; flex-direction:column }
+  .pf-mark{ position:static; flex:1; padding-block:2.5rem }
+  .pf-body{ position:relative; inset:auto }
+}
+.m-panel{ max-height:calc(100dvh - 2rem); overflow-y:auto; overscroll-behavior:contain }
+.nm-nav{ overflow-y:auto; min-height:0 }
+.hcard-row, .hc-btn, button, a{ -webkit-tap-highlight-color:transparent }
+@supports not (height:100dvh){ .m-panel{ max-height:calc(100vh - 2rem) } }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ===== Header ===== -->
+<header class="header rv" data-gate style="--ty:-14px;--d:150ms;--dur:.7s;--ez:var(--e-spring)">
+  <div class="shell header-in">
+    <button class="brand-btn" data-go="home" aria-label="Lumora — home">
+      <span class="brand" data-h="logo"><i class="ic" data-i="logo"></i>Lumora</span>
+    </button>
+    <nav class="nav-primary" aria-label="Primary">
+      <ul>
+        <li><button data-go="home" aria-current="page"><span class="lbl" data-h="navlink">Home</span></button></li>
+        <li><button data-go="works"><span class="lbl" data-h="navlink">Work</span></button></li>
+        <li><button data-go="services"><span class="lbl" data-h="navlink">Services <span class="caret">▾</span></span></button></li>
+        <li><button data-go="about"><span class="lbl" data-h="navlink">Studio</span></button></li>
+        <li><button data-go="careers"><span class="lbl" data-h="navlink">Careers</span></button></li>
+        <li><button data-modal><span class="lbl" data-h="navlink">Contact</span></button></li>
+      </ul>
+    </nav>
+    <div class="hdr-right">
+      <div class="clock glass">
+        <span class="clock-lbl">Local time</span>
+        <span class="clock-time" data-clock-time>9:41am</span>
+        <span class="clock-sep">•</span>
+        <span class="clock-date" data-clock-date>12 March, 2025</span>
+      </div>
+      <button class="menu-btn glass" id="menuBtn" aria-label="Open menu">
+        <span class="menu-inner" data-h="menu"><i class="ic" data-i="grid"></i><span class="menu-word">Menu</span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="home">
+    <div class="liquid">
+      <img src="https://api.getlayers.ai/storage/v1/object/public/public/assets/lumora-e8b711fc68/hero/after.jpg" alt="" fetchpriority="high" />
+      <canvas aria-hidden="true"></canvas>
+    </div>
+    <div class="vignette"></div>
+    <div class="wm rv" data-gate aria-hidden="true" style="--ty:20px;--d:300ms;--o:.4;--dur:1.1s">LUMORA</div>
+
+    <div class="shell hero-grid">
+      <div class="hero-left">
+        <div class="rv" data-gate style="--ty:10px;--d:200ms"><span class="eyebrow">Independent Studio</span></div>
+        <h1 class="hero-h1" data-split="lines" data-gate data-d="250" data-stagger="120">Bold ideas,<br>shipped with<br>quiet precision</h1>
+        <div class="rating rv" data-gate style="--ty:10px;--d:650ms">
+          <span class="stars" aria-label="5 stars"><i class="ic" data-i="star"></i><i class="ic" data-i="star"></i><i class="ic" data-i="star"></i><i class="ic" data-i="star"></i><i class="ic" data-i="star"></i></span>
+          <span class="rating-txt">200+ brands shipped</span>
+        </div>
+        <div class="ctas rv" data-gate style="--ty:10px;--d:750ms">
+          <button class="pill-btn" data-modal>
+            <span class="pill dark arrow" data-h="pill" data-ht=".pill-btn">Let's Talk<span class="pill-badge"><span data-h="arr-r" data-ht=".pill-btn"><i class="ic" data-i="arrow"></i></span></span></span>
+          </button>
+          <button class="pill-btn" data-go="works">
+            <span class="pill outline" data-h="pill" data-ht=".pill-btn">View Work</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hcard rv" data-gate style="--ty:16px;--sc:.96;--d:400ms">
+          <div class="hcard-row" id="hcard" role="button" tabindex="0" aria-label="Next highlight">
+            <div class="hcard-tile"><i class="ic" data-i="logo"></i></div>
+            <div class="hcard-panel">
+              <div class="hc-slot" aria-live="polite">
+                <div class="hc-item on"><div class="hc-cap">Conversion design</div><div class="hc-title">Crafted to convert.</div></div>
+                <div class="hc-item"><div class="hc-cap">Engineering</div><div class="hc-title">Built to scale.</div></div>
+                <div class="hc-item"><div class="hc-cap">Brand systems</div><div class="hc-title">Designed to last.</div></div>
+              </div>
+              <div class="hc-bottom">
+                <div class="hc-dots"><span class="hc-dot on"></span><span class="hc-dot"></span><span class="hc-dot"></span></div>
+                <div class="hc-nav">
+                  <button class="hc-btn prev" aria-label="Previous"><i class="ic" data-i="arrow"></i></button>
+                  <button class="hc-btn next" aria-label="Next"><i class="ic" data-i="arrow"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="partners rv" data-gate style="--ty:14px;--d:550ms">
+          <p class="partners-lbl">Trusted by</p>
+          <ul>
+            <li><span class="partner" data-h="partner"><i class="ic" data-i="dot"></i>Kaido</span></li>
+            <li><span class="partner" data-h="partner"><i class="ic" data-i="dot"></i>Northpeak</span></li>
+            <li><span class="partner" data-h="partner"><i class="ic" data-i="dot"></i>Vellum</span></li>
+            <li><span class="partner" data-h="partner"><i class="ic" data-i="dot"></i>Orbit</span></li>
+            <li><span class="partner" data-h="partner"><i class="ic" data-i="dot"></i>Brightline</span></li>
+            <li><span class="partner" data-h="partner"><i class="ic" data-i="dot"></i>Cobalt</span></li>
+            <li><span class="partner" data-h="partner"><i class="ic" data-i="dot"></i>Mesa</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="shell hero-status rv" data-gate style="--d:900ms">
+      <span>Working since 2014</span>
+      <span class="mid">Remote-first, worldwide</span>
+      <span class="scroll">Scroll to explore <span aria-hidden="true">↓</span></span>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="shell about">
+      <div class="globe-block">
+        <i class="ic globe-bg" data-i="globe" aria-hidden="true"></i>
+        <span class="eyebrow">The Studio</span>
+        <div class="globe-note rv" style="--ty:12px">
+          <i class="ic" data-i="globe"></i>
+          <span>A distributed team building across every time zone.</span>
+        </div>
+      </div>
+      <div class="statement">
+        <h2 data-split="words">We partner with ambitious teams to ship <span class="mute">digital products, brand systems, and the strategy that holds them together.</span></h2>
+        <div class="about-foot rv" style="--ty:12px;--d:200ms">
+          <div>
+            <p class="lbl">Find us online</p>
+            <div class="socials">
+              <a href="#" class="social x" aria-label="X / Twitter"><span data-h="social" class="ic"><i class="ic" data-i="x"></i></span></a>
+              <a href="#" class="social" aria-label="Behance"><span data-h="social" class="ic"><i class="ic" data-i="dot"></i></span></a>
+              <a href="#" class="social" aria-label="Dribbble"><span data-h="social" class="ic"><i class="ic" data-i="dot"></i></span></a>
+            </div>
+          </div>
+          <a class="pill-btn" href="#about">
+            <span class="pill outline arrow" data-h="pill" data-ht=".pill-btn">About Us<span class="pill-badge"><span data-h="arr-r" data-ht=".pill-btn"><i class="ic" data-i="arrow"></i></span></span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CreateBand ===== -->
+  <section aria-label="We build better">
+    <ul class="shell band">
+      <li class="rv" style="--ty:28px;--d:0ms"><div class="tile light" data-h="tile">We</div></li>
+      <li class="rv" style="--ty:28px;--d:120ms"><div class="tile accent" data-h="tile">Build</div></li>
+      <li class="rv" style="--ty:28px;--d:240ms"><div class="tile dark" data-h="tile" aria-label="arrow"><i class="ic" data-i="arrow"></i></div></li>
+      <li class="rv" style="--ty:28px;--d:360ms"><div class="tile ghost" data-h="tile">Better</div></li>
+    </ul>
+  </section>
+
+  <!-- ===== Portfolio ===== -->
+  <section id="works">
+    <div class="shell works">
+      <div class="works-head">
+        <div class="rv" style="--ty:10px"><span class="eyebrow boxed">Portfolio</span></div>
+        <h2 class="h2-big" data-split="lines" data-d="120">Selected Work</h2>
+      </div>
+      <ul class="pf-grid" id="pfGrid"></ul>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section id="services">
+    <div class="shell services">
+      <div class="rv" style="--ty:10px"><span class="eyebrow">Services</span></div>
+      <h2 class="h2-big" data-split="lines" data-d="120">What we do best</h2>
+      <ul class="svc-list" id="svcList"></ul>
+    </div>
+  </section>
+
+  <!-- ===== Stats ===== -->
+  <section aria-label="By the numbers">
+    <div class="shell stats-wrap">
+      <div class="stats rv" style="--ty:40px;--sc:.99;--dur:.9s">
+        <span class="eyebrow light">By the numbers</span>
+        <h2 data-split="lines" data-d="120">Proof in the work, not the words.</h2>
+        <ul class="stats-grid">
+          <li class="rv" style="--ty:20px;--d:0ms"><div class="stat-num"><span data-count="150">0</span>+</div><p class="stat-lbl">Projects delivered</p></li>
+          <li class="rv" style="--ty:20px;--d:90ms"><div class="stat-num"><span data-count="98">0</span>%</div><p class="stat-lbl">Client retention</p></li>
+          <li class="rv" style="--ty:20px;--d:180ms"><div class="stat-num"><span data-count="12">0</span></div><p class="stat-lbl">Years of craft</p></li>
+          <li class="rv" style="--ty:20px;--d:270ms"><div class="stat-num"><span data-count="40">0</span>+</div><p class="stat-lbl">Team members</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="shell footer-in">
+    <div class="f-cta">
+      <h2 data-split="lines" data-stagger="100">Have a project in mind? Let's get to work.</h2>
+      <div><button class="pill-btn" data-modal>
+        <span class="pill light arrow" data-h="pill" data-ht=".pill-btn">Start a project<span class="pill-badge"><span data-h="arr-ur" data-ht=".pill-btn"><i class="ic" data-i="arrowur"></i></span></span></span>
+      </button></div>
+    </div>
+    <div class="f-cols">
+      <div>
+        <div class="f-brand"><i class="ic" data-i="logo"></i>Lumora</div>
+        <p class="f-tag">An independent studio crafting brands, products, and the systems that connect them.</p>
+      </div>
+      <div>
+        <p class="f-title">Company</p>
+        <ul class="f-links">
+          <li><a class="alink" href="#about"><span data-h="link">About</span></a></li>
+          <li><a class="alink" href="#careers"><span data-h="link">Careers</span></a></li>
+          <li><a class="alink" href="#partners"><span data-h="link">Partners</span></a></li>
+          <li><a class="alink" href="#contact" data-modal><span data-h="link">Contact</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="f-title">Services</p>
+        <ul class="f-links">
+          <li><a class="alink" href="#development"><span data-h="link">Development</span></a></li>
+          <li><a class="alink" href="#design"><span data-h="link">Design</span></a></li>
+          <li><a class="alink" href="#qa"><span data-h="link">Quality Assurance</span></a></li>
+          <li><a class="alink" href="#consulting"><span data-h="link">Consulting</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="f-title">Social</p>
+        <ul class="f-links">
+          <li><a class="alink" href="#"><span data-h="link">X / Twitter</span></a></li>
+          <li><a class="alink" href="#"><span data-h="link">Behance</span></a></li>
+          <li><a class="alink" href="#"><span data-h="link">Dribbble</span></a></li>
+          <li><a class="alink" href="#"><span data-h="link">LinkedIn</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-legal">
+      <span>© 2025 Lumora Studio. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a class="alink" href="#privacy"><span data-h="legal">Privacy</span></a>
+        <a class="alink" href="#terms"><span data-h="legal">Terms</span></a>
+      </nav>
+    </div>
+  </div>
+  <div class="wm" aria-hidden="true">LUMORA</div>
+</footer>
+
+<!-- ===== NavMenu ===== -->
+<div class="navmenu" id="navmenu" hidden role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="shell nm-top">
+    <span class="brand"><i class="ic" data-i="logo"></i>Lumora</span>
+    <button class="nm-close" id="nmClose"><i class="ic" data-i="x"></i>Close</button>
+  </div>
+  <nav class="shell nm-nav">
+    <ul id="nmList"></ul>
+  </nav>
+  <div class="shell nm-bottom">
+    <span data-menu-time>Local time</span>
+    <button data-menu-modal>Start a project →</button>
+  </div>
+</div>
+
+<!-- ===== RequestModal ===== -->
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="m-panel" id="mPanel">
+    <button class="m-close" id="mClose" aria-label="Close"><i class="ic" data-i="x"></i></button>
+    <div id="mFormWrap">
+      <div class="m-head">
+        <span class="m-kicker">Start a project</span>
+        <h2 id="mTitle">Tell us what you're building.</h2>
+      </div>
+      <form class="m-form" id="mForm">
+        <label><span>Name</span><input type="text" name="name" required placeholder="Your name" autocomplete="name"></label>
+        <label><span>Email</span><input type="email" name="email" required placeholder="you@company.com" autocomplete="email"></label>
+        <label><span>Project</span><textarea name="project" rows="4" required placeholder="A few words about your project, timeline, and budget."></textarea></label>
+        <div class="m-row">
+          <p class="m-note">We reply within one business day.</p>
+          <button type="submit" class="pill-btn">
+            <span class="pill dark arrow" data-h="pill" data-ht=".pill-btn"><span id="mSubmitLbl">Send request</span><span class="pill-badge"><span data-h="arr-ur" data-ht=".pill-btn"><i class="ic" data-i="arrowur"></i></span></span></span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="m-success" id="mSuccess" hidden>
+      <div class="m-success-badge"><i class="ic" data-i="logo"></i></div>
+      <h2>Request received</h2>
+      <p>Thanks for reaching out — we'll get back to you within one business day.</p>
+      <button class="pill-btn" id="mDone"><span class="pill dark" data-h="pill" data-ht=".pill-btn">Close</span></button>
+    </div>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": { "lenis": "https://unpkg.com/lenis@1.3.23/dist/lenis.mjs" } }
+</script>
+<script type="module">
+import Lenis from 'lenis';
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+/* ---------- Adaptive grid (scale-up above 1920) ---------- */
+function applyAdaptiveGrid(){
+  const FONT_BASE = 16, baseWidth = 1920, coef = 0.6666;
+  const w = window.innerWidth;
+  const widthReduction = ((baseWidth - w) / baseWidth) * 100;
+  const size = FONT_BASE - (FONT_BASE * (widthReduction * coef)) / 100;
+  if (size > FONT_BASE) document.documentElement.style.fontSize = size + 'px';
+  else document.documentElement.style.removeProperty('font-size');
+}
+applyAdaptiveGrid(); addEventListener('resize', applyAdaptiveGrid);
+
+/* ---------- Lenis + scroll lock ---------- */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+const lenis = new Lenis({ smoothWheel: true });
+function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+
+let scrollEnabled = true;
+const htmlEl = document.documentElement;
+function stopScroll(){
+  scrollEnabled = false; lenis.stop();
+  Object.assign(htmlEl.style, { position:'relative', overflow:'hidden', height:'100%' });
+}
+function startScroll(){
+  scrollEnabled = true; lenis.start();
+  ['position','overflow','height'].forEach(p => htmlEl.style.removeProperty(p));
+}
+function scrollToId(id){
+  const el = document.getElementById(id);
+  if (!el) return;
+  setTimeout(() => lenis.scrollTo(el.getBoundingClientRect().top + window.pageYOffset), 50);
+}
+
+/* ---------- Icons ---------- */
+const ICONS = {
+  logo:'<svg viewBox="0 0 48 48" fill="currentColor"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>',
+  arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  arrowur:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.9l-5.8 3.05 1.1-6.46-4.69-4.58 6.49-.94L12 2.5z"/></svg>',
+  globe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9.25"/><path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5"/></svg>',
+  x:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l16 16M20 4 4 20"/></svg>',
+  dot:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/></svg>',
+  grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+};
+const icon = n => `<i class="ic" data-i="${n}"></i>`;
+
+/* ---------- Data-driven sections ---------- */
+const WORKS = [
+  { name:'Aster Labs', cat:'Branding', year:2025, desc:'A complete identity and go-to-market system for a fast-moving research startup.', tags:['Branding','Strategy','Design'] },
+  { name:'Nova Finance', cat:'Product', year:2024, desc:'A finance platform reimagined — clear data, calm interfaces, and effortless flows.', tags:['Product Design','Web App','QA'] },
+  { name:'Helio Studio', cat:'Identity', year:2023, desc:'A bold visual identity and art direction system built to scale across every surface.', tags:['Brand Identity','Art Direction'] },
+  { name:'Pulse Health', cat:'Mobile', year:2023, desc:'A wellness app grounded in research, shipped end to end from concept to release.', tags:['Mobile App','UX Research','Development'] },
+];
+$('#pfGrid').innerHTML = WORKS.map((w, i) => `
+  <li class="rv" style="--ty:48px;--d:${i*90}ms;--dur:.9s">
+    <a href="#" class="pf-link" aria-label="${w.name} — ${w.cat}">
+      <article class="pf-card" data-h="card">
+        <div class="pf-meta"><span>${w.cat} — ${w.year}</span>
+          <span class="pf-badge" data-h="badge" data-ht=".pf-card">${icon('arrowur')}</span></div>
+        <div class="pf-mark" aria-hidden="true"><span>${icon('logo')}<sup>®</sup></span></div>
+        <div class="pf-body">
+          <h3>${w.name}</h3><p>${w.desc}</p>
+          <div class="pf-tags">${w.tags.map(t => `<span class="chip">${t}</span>`).join('')}</div>
+        </div>
+      </article>
+    </a>
+  </li>`).join('');
+
+const SERVICES = [
+  ['01','Software Development','Scalable web & mobile products built to last.'],
+  ['02','Product Design','Interfaces that feel effortless and look sharp.'],
+  ['03','Quality Assurance','Rigorous testing for flawless, confident releases.'],
+  ['04','Consulting','Strategy and direction for ambitious teams.'],
+];
+$('#svcList').innerHTML = SERVICES.map(([n,t,d], i) => `
+  <li class="rv" style="--ty:24px;--d:${i*80}ms">
+    <a href="#" class="svc-link"><div class="svc-row" data-h="row">
+      <span class="svc-idx">${n}</span><h3>${t}</h3><p>${d}</p>
+      <span class="svc-arrow"><span data-h="svcarr" data-ht=".svc-row" class="ic">${icon('arrowur')}</span></span>
+    </div></a>
+  </li>`).join('');
+
+const NAV = [['Home','home'],['Work','works'],['Services','services'],['Studio','about'],['Careers','careers'],['Contact',null]];
+$('#nmList').innerHTML = NAV.map(([l,id], i) => `
+  <li><button class="nm-item" style="transition-delay:${i*45+80}ms" ${id ? `data-menu-go="${id}"` : 'data-menu-modal'}>
+    <span class="nm-idx">0${i+1}</span><span class="nm-lbl">${l}</span></button></li>`).join('');
+
+$$('[data-i]').forEach(el => { el.innerHTML = ICONS[el.dataset.i] || ''; });
+
+/* ---------- Spring hover system ---------- */
+const canHover = matchMedia('(hover:hover) and (pointer:fine)').matches;
+const tf = (el, v) => { el.style.transform = v; };
+const PRESETS = {
+  logo:   { t:320, f:18, a:(e,p)=>tf(e,`scale(${1+.04*p})`) },
+  menu:   { t:320, f:18, a:(e,p)=>tf(e,`scale(${1+.05*p})`) },
+  navlink:{ t:320, f:22, a:(e,p)=>{ tf(e,`translateY(${-2*p}px)`); e.style.opacity = .8+.2*p; } },
+  partner:{ t:320, f:20, a:(e,p)=>{ tf(e,`translateY(${-2*p}px)`); e.style.opacity = .7+.3*p; } },
+  social: { t:320, f:16, a:(e,p)=>tf(e,`scale(${1+.18*p})`) },
+  tile:   { t:300, f:18, a:(e,p)=>tf(e,`scale(${1+.03*p})`) },
+  card:   { t:260, f:22, a:(e,p)=>tf(e,`translateY(${-8*p}px) scale(${1+.012*p})`) },
+  badge:  { t:280, f:18, a:(e,p)=>tf(e,`rotate(${45*p}deg) scale(${1+.08*p})`) },
+  row:    { t:240, f:26, a:(e,p)=>{ e.style.background = `rgba(241,240,238,${Math.min(Math.max(p,0),1)})`; e.style.paddingLeft = (1.5+.5*p)+'rem'; e.style.paddingRight = (1.5-.25*p)+'rem'; } },
+  svcarr: { t:300, f:18, a:(e,p)=>tf(e,`translateX(${5*p}px)`) },
+  pill:   { t:320, f:18, a:(e,p)=>tf(e,`scale(${1+.04*p})`) },
+  'arr-r':{ t:320, f:18, a:(e,p)=>tf(e,`translate(${3*p}px,0)`) },
+  'arr-ur':{ t:320, f:18, a:(e,p)=>tf(e,`translate(${2*p}px,${-2*p}px)`) },
+  link:   { t:320, f:22, a:(e,p)=>{ tf(e,`translateX(${4*p}px)`); e.style.opacity = .65+.35*p; } },
+  legal:  { t:320, f:22, a:(e,p)=>{ tf(e,`translateX(${3*p}px)`); e.style.opacity = .7+.3*p; } },
+};
+const activeSprings = new Set();
+let springRunning = false;
+function springLoop(){
+  const dt = 1/60;
+  for (const s of activeSprings){
+    const acc = s.k.t*(s.target - s.x) - s.k.f*s.v;
+    s.v += acc*dt; s.x += s.v*dt;
+    if (Math.abs(s.target - s.x) < .001 && Math.abs(s.v) < .001){ s.x = s.target; s.v = 0; activeSprings.delete(s); }
+    s.k.a(s.el, s.x);
+  }
+  if (activeSprings.size) requestAnimationFrame(springLoop); else springRunning = false;
+}
+function kick(s){ activeSprings.add(s); if (!springRunning){ springRunning = true; requestAnimationFrame(springLoop); } }
+$$('[data-h]').forEach(el => {
+  const k = PRESETS[el.dataset.h]; if (!k) return;
+  if (getComputedStyle(el).display === 'inline') el.style.display = 'inline-block';
+  const s = { el, k, x:0, v:0, target:0 };
+  k.a(el, 0);
+  if (!canHover) return;
+  const trig = el.dataset.ht ? el.closest(el.dataset.ht) : el;
+  if (!trig) return;
+  trig.addEventListener('mouseenter', () => { s.target = 1; kick(s); });
+  trig.addEventListener('mouseleave', () => { s.target = 0; kick(s); });
+});
+
+/* ---------- Text splitting ---------- */
+function splitText(root, mode){
+  const walk = node => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(' ')); return; }
+          const inner = document.createElement('span');
+          inner.textContent = part;
+          if (mode === 'lines'){
+            inner.className = 'li';
+            const outer = document.createElement('span'); outer.className = 'lw';
+            outer.appendChild(inner); frag.appendChild(outer);
+          } else { inner.className = 'ww'; frag.appendChild(inner); }
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
+    });
+  };
+  walk(root);
+}
+$$('[data-split]').forEach(el => {
+  el.setAttribute('aria-label', el.textContent.replace(/\s+/g,' ').trim());
+  splitText(el, el.dataset.split);
+});
+
+function reveal(el){
+  const mode = el.dataset.split;
+  const base = +(el.dataset.d || 0);
+  if (mode === 'lines'){
+    const stagger = +(el.dataset.stagger || 100);
+    const outers = $$('.lw', el);
+    let lastTop = null, line = -1;
+    outers.forEach(o => {
+      const top = Math.round(o.offsetTop);
+      if (lastTop === null || Math.abs(top - lastTop) > 4){ line++; lastTop = top; }
+      o.firstChild.style.transitionDelay = (base + line*stagger) + 'ms';
+    });
+  } else if (mode === 'words'){
+    $$('.ww', el).forEach((w, i) => { w.style.transitionDelay = (base + i*35) + 'ms'; });
+  }
+  el.classList.add('in');
+}
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
+}, { threshold: .15, rootMargin: '0px 0px -6% 0px' });
+const revealTargets = $$('.rv, [data-split]');
+revealTargets.filter(el => !el.hasAttribute('data-gate')).forEach(el => io.observe(el));
+
+/* ---------- Intro (no loader) ---------- */
+let ready = false;
+function onReady(){
+  if (ready) return;
+  ready = true;
+  revealTargets.filter(el => el.hasAttribute('data-gate')).forEach(reveal);
+}
+(document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(onReady);
+setTimeout(onReady, 1200);
+
+/* ---------- Liquid reveal ---------- */
+(function liquid(){
+  const wrap = $('.liquid'), canvas = $('canvas', wrap);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){ canvas.remove(); return; }
+  const AFTER_SRC = 'https://api.getlayers.ai/storage/v1/object/public/public/assets/lumora-e8b711fc68/hero/before.jpg';
+  const BRUSH = 143, DECAY = .016, FADE_FRAMES = 120;
+  const ctx = canvas.getContext('2d');
+  const cover = document.createElement('canvas'), cctx = cover.getContext('2d');
+  const brush = document.createElement('canvas'), bctx = brush.getContext('2d');
+  let dpr = 1, W = 1, H = 1, radius = BRUSH, diam = 1;
+  let last = null, points = [], idle = 9999, loaded = false;
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => { loaded = true; drawCover(); };
+  img.src = AFTER_SRC;
+
+  function drawCover(){
+    if (!loaded) return;
+    const iw = img.naturalWidth, ih = img.naturalHeight;
+    const s = Math.max(W/iw, H/ih), dw = iw*s, dh = ih*s;
+    cctx.clearRect(0,0,W,H);
+    cctx.drawImage(img, (W-dw)/2, (H-dh)/2, dw, dh);
+  }
+  function size(){
+    const r = wrap.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.width = Math.max(1, Math.round(r.width*dpr));
+    H = canvas.height = Math.max(1, Math.round(r.height*dpr));
+    canvas.style.width = r.width + 'px'; canvas.style.height = r.height + 'px';
+    cover.width = W; cover.height = H;
+    radius = BRUSH*dpr; diam = Math.ceil(radius*2);
+    brush.width = brush.height = diam;
+    drawCover();
+  }
+  new ResizeObserver(size).observe(wrap);
+  size();
+
+  addEventListener('pointermove', e => {
+    if (!loaded) return;
+    const r = canvas.getBoundingClientRect();
+    const x = (e.clientX - r.left)*dpr, y = (e.clientY - r.top)*dpr;
+    if (x < -radius || y < -radius || x > W + radius || y > H + radius){ last = null; return; }
+    if (last){
+      const dx = x - last.x, dy = y - last.y, dist = Math.hypot(dx, dy);
+      const step = Math.max(radius*.3, 1);
+      const n = Math.min(Math.ceil(dist/step), 60);
+      for (let i = 1; i <= n; i++) points.push({ x:last.x + dx*i/n, y:last.y + dy*i/n });
+    } else points.push({ x, y });
+    last = { x, y };
+  }, { passive:true });
+
+  function stamp(x, y){
+    const c = diam/2;
+    bctx.globalCompositeOperation = 'source-over';
+    bctx.clearRect(0,0,diam,diam);
+    const g = bctx.createRadialGradient(c,c,0,c,c,c);
+    g.addColorStop(0,'rgba(255,255,255,1)');
+    g.addColorStop(.55,'rgba(255,255,255,.82)');
+    g.addColorStop(1,'rgba(255,255,255,0)');
+    bctx.fillStyle = g; bctx.fillRect(0,0,diam,diam);
+    bctx.globalCompositeOperation = 'source-in';
+    bctx.drawImage(cover, x-c, y-c, diam, diam, 0, 0, diam, diam);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.drawImage(brush, x-c, y-c);
+  }
+  function tick(){
+    requestAnimationFrame(tick);
+    const drawing = points.length > 0;
+    if (drawing) idle = 0;
+    else { idle++; if (idle > FADE_FRAMES) return; }
+    const fade = drawing ? DECAY : Math.min(DECAY + idle*.004, .5);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.fillStyle = `rgba(0,0,0,${fade})`;
+    ctx.fillRect(0,0,W,H);
+    ctx.globalCompositeOperation = 'source-over';
+    if (drawing){ for (const p of points) stamp(p.x, p.y); points.length = 0; }
+    if (idle === FADE_FRAMES) ctx.clearRect(0,0,W,H);
+  }
+  requestAnimationFrame(tick);
+})();
+
+/* ---------- Clock ---------- */
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function tickClock(){
+  const d = new Date();
+  let h = d.getHours();
+  const mer = h >= 12 ? 'pm' : 'am';
+  h = h % 12 || 12;
+  const time = `${h}:${String(d.getMinutes()).padStart(2,'0')}${mer}`;
+  const date = `${d.getDate()} ${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
+  $$('[data-clock-time]').forEach(e => e.textContent = time);
+  $$('[data-clock-date]').forEach(e => e.textContent = date);
+  $$('[data-menu-time]').forEach(e => e.textContent = `Local time — ${time}`);
+}
+tickClock(); setInterval(tickClock, 1000);
+
+/* ---------- Hero card carousel ---------- */
+(function carousel(){
+  const items = $$('.hc-item'), dots = $$('.hc-dot'), n = items.length;
+  let i = 0;
+  function go(step){
+    const prev = items[i];
+    i = (i + step + n) % n;
+    const next = items[i], dir = step > 0 ? 1 : -1;
+    prev.classList.remove('on');
+    prev.style.transform = `translateY(${-14*dir}px)`;
+    next.style.transition = 'none';
+    next.style.transform = `translateY(${14*dir}px)`;
+    next.offsetHeight;
+    next.style.transition = '';
+    next.classList.add('on');
+    next.style.transform = 'translateY(0)';
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+  }
+  const card = $('#hcard');
+  card.addEventListener('click', () => go(1));
+  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); go(1); } });
+  $('.hc-btn.next').addEventListener('click', e => { e.stopPropagation(); go(1); });
+  $('.hc-btn.prev').addEventListener('click', e => { e.stopPropagation(); go(-1); });
+})();
+
+/* ---------- Stats count-up ---------- */
+(function stats(){
+  const els = $$('[data-count]');
+  let lastT = 0, pending = false;
+  function update(){
+    const vh = window.innerHeight;
+    els.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const p = Math.max(0, Math.min(1, (vh - r.top) / (vh/2 + r.height/2)));
+      el.textContent = Math.round(p * +el.dataset.count);
+    });
+  }
+  function onScroll(){
+    const now = performance.now();
+    if (now - lastT > 30){ lastT = now; update(); }
+    else if (!pending){ pending = true; setTimeout(() => { pending = false; lastT = performance.now(); update(); }, 30); }
+  }
+  lenis.on('scroll', onScroll);
+  addEventListener('scroll', onScroll, { passive:true });
+  addEventListener('resize', update);
+  update();
+})();
+
+/* ---------- NavMenu ---------- */
+const menu = $('#navmenu');
+let menuOpen = false, modalOpen = false;
+function openMenu(){
+  menu.hidden = false; menuOpen = true; stopScroll();
+  requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add('open')));
+  $('#nmClose').focus();
+}
+function closeMenu(cb){
+  if (!menuOpen) return cb && cb();
+  menu.classList.remove('open'); menuOpen = false;
+  setTimeout(() => {
+    menu.hidden = true;
+    if (!modalOpen) startScroll();
+    cb && cb();
+  }, 380);
+}
+$('#menuBtn').addEventListener('click', openMenu);
+$('#nmClose').addEventListener('click', () => closeMenu(() => $('#menuBtn').focus()));
+menu.addEventListener('click', e => {
+  const go = e.target.closest('[data-menu-go]');
+  const m = e.target.closest('[data-menu-modal]');
+  if (go) closeMenu(() => scrollToId(go.dataset.menuGo));
+  else if (m) closeMenu(openModal);
+});
+
+/* ---------- RequestModal ---------- */
+const modal = $('#modal'), form = $('#mForm');
+let lastFocus = null;
+function openModal(){
+  lastFocus = document.activeElement;
+  modal.hidden = false; modal.classList.remove('closing'); modalOpen = true; stopScroll();
+  requestAnimationFrame(() => requestAnimationFrame(() => modal.classList.add('open')));
+  setTimeout(() => { const f = $('input', modal); if (f && !$('#mFormWrap').hidden) f.focus({ preventScroll:true }); }, 60);
+}
+function closeModal(){
+  if (!modalOpen) return;
+  modalOpen = false;
+  modal.classList.remove('open'); modal.classList.add('closing');
+  setTimeout(() => {
+    modal.hidden = true; modal.classList.remove('closing');
+    if (!menuOpen) startScroll();
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll:true });
+    setTimeout(() => {
+      form.reset();
+      $('#mSubmitLbl').textContent = 'Send request';
+      $('#mFormWrap').hidden = false; $('#mSuccess').hidden = true;
+    }, 300);
+  }, 420);
+}
+modal.addEventListener('click', closeModal);
+$('#mPanel').addEventListener('click', e => e.stopPropagation());
+$('#mClose').addEventListener('click', closeModal);
+$('#mDone').addEventListener('click', closeModal);
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  $('#mSubmitLbl').textContent = 'Sending…';
+  setTimeout(() => {
+    $('#mFormWrap').hidden = true; $('#mSuccess').hidden = false;
+    $('#mDone').focus({ preventScroll:true });
+  }, 700);
+});
+
+addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (modalOpen) closeModal();
+  else if (menuOpen) closeMenu(() => $('#menuBtn').focus());
+});
+
+/* ---------- Global routing ---------- */
+document.addEventListener('click', e => {
+  const m = e.target.closest('[data-modal]');
+  if (m && !menu.contains(m)){ e.preventDefault(); openModal(); return; }
+  const go = e.target.closest('[data-go]');
+  if (go){ e.preventDefault(); scrollToId(go.dataset.go); return; }
+  const a = e.target.closest('a[href^="#"]');
+  if (a){
+    e.preventDefault();
+    const id = a.getAttribute('href').slice(1);
+    if (id === 'main'){ $('#main').focus({ preventScroll:true }); scrollToId('home'); return; }
+    if (id) scrollToId(id);
+  }
+});
+</script>
+</body>
+</html>
